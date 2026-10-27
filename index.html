@@ -30,10 +30,27 @@
     <section class="panel">
       <div class="section-head"><h2 id="formTitle">課題を追加</h2><span class="required">* 必須</span></div>
       <form id="taskForm">
-        <label>授業名・科目名 *<input id="course" maxlength="60" placeholder="例：都市計画論" required></label>
+        <label>講義を選択<select id="courseSelect"><option value="">講義を選ぶ／新しく入力</option></select></label>
+        <label>講義名 *<input id="course" maxlength="60" placeholder="例：都市計画論" required></label>
+        <div class="manage-row"><button type="button" id="deleteCourseBtn" class="delete-btn secondary" disabled>選択した講義を削除</button><span class="field-help">講義を削除しても、登録済みの課題は消えません。</span></div>
+        <label>保存済みの課題内容から選択<select id="contentPreset"><option value="">課題内容を選ぶ（任意）</option></select></label>
         <label>課題の内容 *<input id="taskTitle" maxlength="100" placeholder="例：第4回レポート" required></label>
-        <label>提出期限 *<input id="due" type="datetime-local" required></label>
-        <label>リマインド設定<select id="reminders"><option value="1440,60">前日・1時間前</option><option value="4320,1440,60">3日前・前日・1時間前</option><option value="1440">前日</option><option value="180,30">3時間前・30分前</option><option value="0">期限時刻のみ</option></select></label>
+        <label>課題の繰り返し<select id="recurrence"><option value="once">今回だけ</option><option value="weekly">毎週繰り返す</option></select></label>
+        <div id="onceDueWrap"><label>提出期限 *<input id="due" type="datetime-local" required></label></div>
+        <div id="weeklyWrap" class="hidden">
+          <label>提出曜日（複数選択できます）</label>
+          <div id="weekdays" class="weekdays" aria-label="繰り返す曜日を選択">
+            <button type="button" data-day="1">月</button><button type="button" data-day="2">火</button><button type="button" data-day="3">水</button><button type="button" data-day="4">木</button><button type="button" data-day="5">金</button><button type="button" data-day="6">土</button><button type="button" data-day="0">日</button>
+          </div>
+          <label>提出時刻 *<input id="weeklyTime" type="time" value="23:59"></label>
+          <p class="field-help">選んだ曜日ごとに課題を作成します。課題を完了すると、次回分が自動で追加されます。</p>
+        </div>
+        <label>リマインド設定<select id="remindersPreset"><option value="1440,60">前日・1時間前</option><option value="4320,1440,60">3日前・前日・1時間前</option><option value="10080,4320,1440,60">1週間前・3日前・前日・1時間前</option><option value="1440">前日</option><option value="180,30">3時間前・30分前</option><option value="0">提出期限の時刻</option><option value="custom">個別に設定</option></select></label>
+        <div class="reminder-custom">
+          <p class="field-help">必要なタイミングを追加できます（例：提出の2日前、45分前）。</p>
+          <div class="reminder-add-row"><input id="reminderAmount" type="number" min="0" max="365" value="2" aria-label="リマインドの数字"><select id="reminderUnit" aria-label="リマインドの単位"><option value="1440">日前</option><option value="60">時間前</option><option value="1">分前</option></select><button type="button" id="addReminderBtn" class="secondary">追加</button></div>
+          <div id="reminderChips" class="reminder-chips"></div>
+        </div>
         <label>科目カラー</label><div id="colors" class="colors" aria-label="科目カラーを選択"></div>
         <div class="form-actions"><button type="submit" class="primary" id="saveBtn">課題を追加</button><button type="button" class="secondary hidden" id="cancelEdit">編集をやめる</button></div>
       </form>
