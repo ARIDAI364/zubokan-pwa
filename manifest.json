@@ -1,0 +1,15 @@
+{
+  "id": "./",
+  "name": "ズボ管 - 課題の出し忘れ0",
+  "short_name": "ズボ管",
+  "description": "大学の課題の出し忘れを減らす課題管理アプリ",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f6fb",
+  "theme_color": "#5b63e6",
+  "icons": [
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"}
+  ]
+}
